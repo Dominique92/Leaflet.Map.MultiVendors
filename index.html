@@ -17,13 +17,14 @@
 	<!-- Layers from https://github.com/shramov/leaflet-plugins -->
 	<script src="../../../github.com/shramov/leaflet-plugins/layer/tile/Google.js"></script>
 	<script src="../../../github.com/shramov/leaflet-plugins/layer/tile/Bing.js"></script>
-	<script src="../../../github.com/shramov/leaflet-plugins/layer/tile/Yandex.js"></script>
+	<script src="../../../github.com/rob-murray/os-leaflet/src/osopenspace.js"></script>
 
 	<script type="text/javascript">
 		// Define keys before specific layers includes
 		var key = {
 			ign:  'k05hnrprcj17gumsxsvx5pat', // Localhost Expire le 4 oct 2017
 			bing: 'AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf',
+			os:   'CBE047F823B5E83CE0405F0ACA6042AB', // http://www.ordnancesurvey.co.uk/business-and-government/products/os-openspace/
 		};
 	</script>
 	<script src="IGN.js"></script>
@@ -47,8 +48,17 @@
 </head>
 
 <body>
-	<p>Leaflet extension for multi vendors maps & projections (Google, Bing, Open projects, IGN France, SwissTopo, IDEE Espa&ntilde;a, IGM Italy, ...)</p>
+	<p>Leaflet extension for multi vendors maps & projections (OSM, Thunder Forest,
+IGN France,
+SwissTopo,
+IDEE Espa&ntilde;a,
+IGM Italie,
+OS Great Britain,
+Bing Microsoft,
+Google maps,
+MapQuest AOL,
+...)</p>
 	<p>Sources on <a href= "https://github.com/Dominique92/Leaflet.MapMultiCRS">Github Dominique92/Leaflet.MapMultiCRS</a></p>
-	<div id="map" style="width: 800px; height: 600px"></div>
+	<div id="map" style="width: 800px; height: 605px"></div>
 </body>
 </html>
