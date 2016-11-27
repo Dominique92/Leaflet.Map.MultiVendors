@@ -6,7 +6,7 @@
  * French maps
  * Lambert projections et IGN layers
  * Developpement key (localhost): http://api.ign.fr
- * Production key: http://pro.ign.fr/api-web => Service en ligne => Pour un site internet grand public => S'ABONNER
+ * Production key: http://professionnels.ign.fr
  * IGN doc on http://api.ign.fr/jsp/site/Portal.jsp?page_id=6&document_id=80&dossier_id=53
  *
  * Usage: new L.TileLayer.IGN({k:'CLE_IGN').addTo(map);
@@ -21,14 +21,17 @@
 
 L.TileLayer.IGN = L.TileLayer.extend({
 	options: {
-		p: window.location.href.match(/[a-z]*/i)[0], // Use the same protocol than the referer.
 		l: 'GEOGRAPHICALGRIDSYSTEMS.MAPS',
 		f: 'jpeg',
+		maxNativeZoom: 18,
+		maxZoom: 21,
+		errorTileUrl: 'http://www.ign.fr/sites/all/themes/ign_portail/logo.png',
 		attribution: '&copy; <a href="http://www.ign.fr/">IGN</a>'
 	},
+
 	initialize: function(options) {
 		L.TileLayer.prototype.initialize.call(this,
-			'{p}://wxs.ign.fr/{k}/geoportail/wmts' +
+			'//wxs.ign.fr/{k}/geoportail/wmts' +
 				'?LAYER={l}'+
 				'&EXCEPTIONS=text/xml'+
 				'&FORMAT=image/{f}'+

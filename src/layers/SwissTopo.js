@@ -18,10 +18,11 @@
 
 // Switzerland Coordinate Reference System
 L.CRS.EPSG21781 = L.extend(
-	new L.Proj.CRS( // TBD: partager le CRS ???
+	new L.Proj.CRS(
 		'EPSG:21781',
 		'+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=600000 +y_0=200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs', {
-			resolutions: [4000, 3750, 3500, 3250, 3000, 2750, 2500, 2250, 2000, 1750, 1500, 1250, 1000, 750, 650, 500, 250, 100, 50, 20, 10, 5, 2.5, 2, 1.5, 1, 0.5],
+			resolutions: [4000, 3750, 3500, 3250, 3000, 2750, 2500, 2250, 2000, 1750, 1500, 1250, 1000, 750, 650, 500, 250, 100, 50, 20, 10, 5, 2.5, 2, 1.5, 1, 0.5,
+				1/4, 1/8, 1/16], // Extra for scaled images zoom
 			origin: [420000, 350000]
 		}
 	), {
@@ -40,20 +41,20 @@ L.CRS.EPSG21781 = L.extend(
 // SwissTopo layer
 L.TileLayer.SwissTopo = L.TileLayer.extend({
 	options: {
-		p: window.location.href.match(/[a-z]*/i)[0], // Use the same protocol than the referer.
 		subdomains: '56789',
 		l: 'ch.swisstopo.pixelkarte-farbe',
 		f: 'jpeg',
 		crs: L.CRS.EPSG21781,
-		maxZoom: L.CRS.EPSG21781.options.resolutions.length - 1,
 		minZoom: 0,
+		maxNativeZoom: L.CRS.EPSG21781.options.resolutions.length - 1 - 3, // Max available tiles
+		maxZoom: L.CRS.EPSG21781.options.resolutions.length - 1, // Max authorized zoom
 		attribution: '&copy; <a href="http://www.swisstopo.admin.ch/internet/swisstopo/fr/home.html">swisstopo, BAFU</a>'
 	},
 
 	initialize: function(options) {
 		L.TileLayer.prototype.initialize.call(
 			this,
-			'{p}://wmts{s}.geo.admin.ch/1.0.0/{l}/default/current/21781/{z}/{y}/{x}.{f}',
+			'//wmts{s}.geo.admin.ch/1.0.0/{l}/default/current/21781/{z}/{y}/{x}.{f}',
 			options
 		);
 	}

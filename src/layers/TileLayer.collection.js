@@ -64,25 +64,28 @@ L.TileLayer.collection = function(name) {
 		if (typeof key != 'undefined' && typeof key.os != 'undefined') {
 				if (window.location.href[4] != 's') // Use the same protocol than the referer.
 	
-
-			if (typeof L.TileLayer.OSOpenSpace != 'undefined') { // For Leaflet V0.7
-				L.TileLayer.OSOpenSpace.prototype.options.crs = L.OSOpenSpace.getCRS(); // Assign CRS to OS-UK layer options
+			if (typeof L.OSOpenSpace.TileLayer != 'undefined') { // For Leaflet V1.0
+				L.OSOpenSpace.TileLayer.prototype.options.crs = L.OSOpenSpace.CRS; // Assign CRS to OS-UK layer options
+				this._col['OS Great Britain'] = new L.OSOpenSpace.TileLayer(key.os);
+			}
+			else if (typeof L.TileLayer.OSOpenSpace != 'undefined') { // For Leaflet V0.7
 				L.TileLayer.OSOpenSpace.prototype._url = L.TileLayer.OSOpenSpace.prototype._url.replace('https', 'http'); // https adjustments
 				this._col['OS-Great Britain'] = new L.TileLayer.OSOpenSpace(key.os, {}); // Il faut mettre le {} sinon BUG
 			}
-			else if (typeof L.TileLayer.WMS.OS != 'undefined') // For Leaflet V1.0
-				this._col['OS Great Britain'] = new L.TileLayer.WMS.OS({k:key.os});
 		}
 
 		// MicroSoft
 		if (typeof L.BingLayer != 'undefined' &&
-			typeof key != 'undefined' && typeof key.bing != 'undefined')
+			typeof key != 'undefined' && typeof key.bing != 'undefined') {
+			L.BingLayer.prototype.options.maxNativeZoom = 18;
+			L.BingLayer.prototype.options.maxZoom = 21;
+
 			L.Util.extend(this._col, {
 //				'Bing Road':   new L.BingLayer(key.bing, {type:'Road'}),
 				'Bing Photo':  new L.BingLayer(key.bing, {type:'Aerial'}),
 //				'Bing Hybrid': new L.BingLayer(key.bing, {type:'AerialWithLabels'})
 			});
-
+		}
 		// Google
 		if (typeof L.TileLayer.Google != 'undefined')
 			L.Util.extend(this._col, {
@@ -94,7 +97,9 @@ L.TileLayer.collection = function(name) {
 
 		// Rien
 		L.Util.extend(this._col, {
-			'Neutre': L.tileLayer('')
+			'Neutre': L.tileLayer('', {
+				maxZoom: 23
+			})
 		});
 	}
 

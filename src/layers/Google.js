@@ -17,17 +17,35 @@
 
 L.TileLayer.Google = L.TileLayer.extend({
 	options: {
-		p: window.location.href.match(/[a-z]*/i)[0], // Use the same protocol than the referer.
 		subdomains: '0123',
 		l: 'm', // Part of the url depending on the GG layer type.
-		maxZoom: 20,
+		maxZoom: 22,
 		attribution: '&copy; <a href="https://www.google.com/maps">Google Maps</a>'
 	},
 
 	initialize: function(options) {
 		L.TileLayer.prototype.initialize.call(this,
-			'{p}://mt{s}.google.com/vt/lyrs={l}&x={x}&y={y}&z={z}',
+			'//mt{s}.google.com/vt/lyrs={l}&x={x}&y={y}&z={z}',
 			options
 		);
+	},
+
+	onAdd: function(map) {
+		map.on('movestart', this._resetNativeZoom, this);
+		L.TileLayer.prototype.onAdd.call(this, map);
+	},
+
+	onRemove: function(map) {
+		map.off('movestart', this._resetNativeZoom, this);
+		L.TileLayer.prototype.onRemove.call(this, map);
+	},
+
+	_resetNativeZoom: function() {
+		this.options.maxNativeZoom = 20;
+	},
+
+	_tileOnError: function(done, tile, e) {
+		this.options.maxNativeZoom = 19; // Some areas don't support zoom=20
+		L.TileLayer.prototype._tileOnError.call(this, done, tile, e);
 	}
 });

@@ -10,8 +10,7 @@
 
 L.TileLayer.OSM = L.TileLayer.extend({
 	options: {
-		p: window.location.href.match(/[a-z]*/i)[0], // Use the same protocol than the referer.
-		url: '{p}://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+		url: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // No scheme specified to use the same schme than the referer.
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
 	},
 	initialize: function(options) {
@@ -27,7 +26,7 @@ L.TileLayer.OSM = L.TileLayer.extend({
 
 L.TileLayer.OSM.FR = L.TileLayer.OSM.extend({
 	options: {
-		url: '{p}://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
+		url: '//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png' // Available on http & https
 	}
 });
 
@@ -59,7 +58,7 @@ L.TileLayer.OSM.hikebike = L.TileLayer.OSM.extend({
 
 L.TileLayer.OSM.hill = L.TileLayer.OSM.extend({
 	options: {
-		url: '{p}://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png',
+		url: '//{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png',
 		subdomains: 'abc',
 		maxZoom: 15,
 		subAttribution: '<a href="https://wikitech.wikimedia.org">Wikimedia Tool Labs</a>'
@@ -71,7 +70,7 @@ var ft = ['Landscape', 'Outdoors', 'Cycle', 'Transport'];
 for (m in ft)
 	L.TileLayer.OSM[ft[m]] = L.TileLayer.OSM.extend({
 		options: {
-			url: '{p}://{s}.tile.thunderforest.com/' + ft[m].toLowerCase() + '/{z}/{x}/{y}.png',
+			url: '//{s}.tile.thunderforest.com/' + ft[m].toLowerCase() + '/{z}/{x}/{y}.png',
 			subAttribution: '<a href="http://www.thunderforest.com">Thunderforest ' + ft[m] + '</a>'
 		}
 	});

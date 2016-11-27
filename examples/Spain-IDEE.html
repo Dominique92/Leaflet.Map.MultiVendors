@@ -6,20 +6,20 @@
 	<link rel="icon" type="image/png" href="http://leafletjs.com/docs/images/favicon.ico" />
 
 	<!-- Leaflet kernel -->
-	<link  href="../../../Leaflet/Leaflet/dist/leaflet.css" rel="stylesheet" />
-	<script src="../../../Leaflet/Leaflet/dist/leaflet-src.js"></script>
+	<link  href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" rel="stylesheet" />
+	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
-	<script src="../layers/IDEE.js"></script>
+	<script src="../src/layers/IDEE.js"></script>
 </head>
 
 <body>
 	<p>Leaflet extension for France IGN maps</p>
-	<p>This demo runs on Leaflet <script>document.write(L.version)</script> and is also supported on Leaflet V1.0 <a href="v1.0.html">(full demo)</a></p>
+	<p>This demo runs on Leaflet V<script>document.write(L.version)</script> and is also supported on Leaflet V0.7 <a href="v0.7.html">(full demo)</a></p>
 
 	<div id="map" style="width: 800px; height: 600px"></div>
 
 	<!-- Doc & debug -->
-	<p>See the code of this layer <a href="../layers/IDEE.js">here</a></p>
+	<p>See the code of this layer <a href="../src/layers/IDEE.js">here</a></p>
 	<p>See the full code & docs on <a href= "https://github.com/Dominique92/Leaflet.Map.MultiVendors">Github Dominique92/Leaflet.Map.MultiVendors</a></p>
 
 	<a href="Italy-IGM.html"
@@ -27,7 +27,6 @@
 	   title="Test IGM">
 		&#10144;
 	</a>
-	<p>Return to <a href= "..">Leaflet.Map.MultiVendors</a></p>
 
 	<!-- Insert the javascript after all <div> are defined -->
 	<script>
