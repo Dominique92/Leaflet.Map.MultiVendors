@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2014 Dominique Cavailhez
  * https://github.com/Dominique92
- * Supported both on Leaflet V0.7 & V1.0
+ * Supported on Leaflet V0.7 & V1.0
  *
  * OSM maps
  * Instances of the WMS class allow viewing maps inherited from the OpenStreetMap databases
@@ -66,11 +66,12 @@ L.TileLayer.OSM.hill = L.TileLayer.OSM.extend({
 });
 
 // Cartes ThunderForest
+// Create an account here to get an API KEY : https://manage.thunderforest.com
 var ft = ['Landscape', 'Outdoors', 'Cycle', 'Transport'];
 for (m in ft)
 	L.TileLayer.OSM[ft[m]] = L.TileLayer.OSM.extend({
 		options: {
-			url: '//{s}.tile.thunderforest.com/' + ft[m].toLowerCase() + '/{z}/{x}/{y}.png',
+			url: '//{s}.tile.thunderforest.com/' + ft[m].toLowerCase() + '/{z}/{x}/{y}.png?apikey={k}',
 			subAttribution: '<a href="http://www.thunderforest.com">Thunderforest ' + ft[m] + '</a>'
 		}
 	});
